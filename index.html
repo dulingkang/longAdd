@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Longadd 大数相加 : Two long number add together and output">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Longadd 大数相加</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/dulingkang/longAdd">View on GitHub</a>
+
+          <h1 id="project_title">Longadd 大数相加</h1>
+          <h2 id="project_tagline">Two long number add together and output</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/dulingkang/longAdd/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/dulingkang/longAdd/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>
+<a id="两个不超过128位的数相加输出和输入时-中间以空格格开例如输入-1221-4322-输出-5543" class="anchor" href="#%E4%B8%A4%E4%B8%AA%E4%B8%8D%E8%B6%85%E8%BF%87128%E4%BD%8D%E7%9A%84%E6%95%B0%E7%9B%B8%E5%8A%A0%E8%BE%93%E5%87%BA%E5%92%8C%E8%BE%93%E5%85%A5%E6%97%B6-%E4%B8%AD%E9%97%B4%E4%BB%A5%E7%A9%BA%E6%A0%BC%E6%A0%BC%E5%BC%80%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5-1221-4322-%E8%BE%93%E5%87%BA-5543" aria-hidden="true"><span class="octicon octicon-link"></span></a>两个不超过128位的数相加，输出和，输入时 中间以空格格开，例如，输入： 1221 4322 输出 5543</h3>
+
+<pre><code>using namespace std;
+
+#define MAX_INPUT 129
+
+int charToInt(char source[], int dest[]);
+int addLong(int s1[],int s2[],int len1, int len2, int out[]);
+void prin(int a[], int len);
+void reverserMy(int sourceRe[], int lenRever);
+
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+    char a[MAX_INPUT] ;
+    char b[MAX_INPUT] ;
+    int a1[MAX_INPUT] = {0};
+    int b1[MAX_INPUT] = {0};
+    int c[MAX_INPUT];
+
+    cin&gt;&gt;a;
+    cin&gt;&gt;b;
+    int len1 = charToInt(a,a1);
+    int len2 = charToInt(b,b1);
+    reverserMy(a1,len1);
+    reverserMy(b1,len2);
+    int len3 = addLong(a1,b1,len1,len2,c);
+    reverserMy(c, len3);
+    prin(c,len3);
+    return 0;
+}
+int charToInt(char source[], int dest[])
+{
+    int i = 0;
+    char *p = source;
+    int destTmp[MAX_INPUT]={0};
+    while(*p != '\0')
+    {
+        if(*p &gt;= '0' &amp;&amp; *p &lt;= '9')
+        {
+            destTmp[i] = *p - '0';
+            i++;
+            p++;
+        }
+        else p++;
+    }
+    for(int j = 0;j &lt; i; j++)
+    {
+        dest[j] = destTmp[j];
+    }
+    return i;
+}
+int addLong(int s1[],int s2[],int len1, int len2, int out[])
+{
+    int len = len1 &lt; len2 ? len2 : len1;
+    int outTmp[MAX_INPUT] = {0};
+    int j = 0;
+    int value = 0;
+    for(int i = 0; i &lt; len; i++)
+    {
+        outTmp[j++] = (value + s1[i] + s2[i])%10;
+        value = (value + s1[i] + s2[i])/10;
+    }
+    if(value) outTmp[j++] = value;
+    for(int m = 0;m &lt; j; m++)
+    {
+        out[m] = outTmp[m];
+    }
+    return j;
+}
+
+void prin(int a[],int len)
+{
+    for (int m = 0;m &lt; len; m++)
+        cout&lt;&lt;a[m];
+}
+
+void reverserMy(int sourceRe[], int lenRever)
+{
+    int tmp = 0;
+    for (int i = 0; i &lt;= (lenRever-1)/2; i++)
+    {
+        tmp = sourceRe[i];
+        sourceRe[i] = sourceRe[lenRever-1-i];
+        sourceRe[lenRever-1-i] = tmp;
+    }
+
+}
+</code></pre>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Longadd 大数相加 maintained by <a href="https://github.com/dulingkang">dulingkang</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
